@@ -23,17 +23,20 @@ for s in sections:
     print(f"Section #{s}: {'FOUND' if found else 'MISSING'}")
 
 checks = [
-    # Overview
+    # Overview (Exact Approved Reference Copy)
     "EDUCATION MANAGEMENT SYSTEM",
-    "Your campus.",
-    "Connected.",
-    "Administration, teaching and learning.",
-    "Together in one platform.",
+    "Less admin.",
+    "More time for",
+    "learning.",
+    "Bring records, attendance and classroom",
+    "tasks together—so your team can focus on",
+    "education.",
     "For schools, colleges and universities",
+    "Explore Edubot",
     "Request a Demo",
-    "See How It Works",
-    "Attendance verified",
-    "Learning, organised",
+    "Administration",
+    "Teaching",
+    "Learning",
     
     # Features
     "Campus essentials. All in one place.",

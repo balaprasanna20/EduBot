@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
-import { Play } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 export interface HeroActionsProps {
   className?: string;
@@ -13,44 +12,36 @@ export default function HeroActions({ className = "" }: HeroActionsProps) {
     e.preventDefault();
     const elem = document.getElementById(targetId);
     if (elem) {
-      elem.scrollIntoView({ behavior: "smooth" });
+      const prefersReduced =
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      elem.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth" });
     }
   };
 
   return (
-    <div className={`flex flex-wrap items-center gap-3.5 sm:gap-4 ${className}`}>
-      {/* Primary CTA: Request a Demo */}
-      <motion.a
+    <div className={`flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 lg:gap-8 ${className}`}>
+      {/* Primary CTA: Explore Edubot -> (approx 266 × 65px, 13px radius, #0747FF) */}
+      <a
+        href="#features"
+        onClick={(e) => handleScrollTo(e, "features")}
+        className="inline-flex items-center justify-center w-full sm:w-[250px] lg:w-[266px] h-[56px] lg:h-[65px] px-6 bg-[#0747FF] hover:bg-[#0039DE] text-white font-semibold text-base lg:text-[20px] rounded-[13px] shadow-sm transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 cursor-pointer select-none"
+        aria-label="Explore Edubot features"
+      >
+        <span>Explore Edubot</span>
+        <ArrowRight className="w-5 h-5 ml-2.5 stroke-[2.2]" aria-hidden="true" />
+      </a>
+
+      {/* Secondary CTA: Request a Demo ↗ (Navy text, transparent background, vertically centered) */}
+      <a
         href="#request-demo"
         onClick={(e) => handleScrollTo(e, "request-demo")}
-        whileHover={{ scale: 1.03 }}
-        whileTap={{ scale: 0.97 }}
-        transition={{ type: "spring", stiffness: 400, damping: 25 }}
-        className="inline-flex items-center justify-center px-6 py-3 text-sm sm:text-base font-semibold text-white bg-primary hover:bg-[#0039DE] active:bg-[#0034C0] rounded-lg shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 cursor-pointer transition-colors select-none"
-        aria-label="Request a personalised Edubot demo"
+        className="inline-flex items-center text-[#080D28] hover:text-[#0747FF] font-semibold text-base lg:text-[20px] transition-colors duration-150 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 cursor-pointer select-none"
+        aria-label="Request a Demo"
       >
-        Request a Demo
-      </motion.a>
-
-      {/* Secondary CTA: See How It Works */}
-      <motion.a
-        href="#user-portals"
-        onClick={(e) => handleScrollTo(e, "user-portals")}
-        whileHover={{ scale: 1.03 }}
-        whileTap={{ scale: 0.97 }}
-        transition={{ type: "spring", stiffness: 400, damping: 25 }}
-        className="inline-flex items-center justify-center px-3.5 py-3 text-sm sm:text-base font-semibold text-navy hover:text-primary transition-colors rounded-lg group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 cursor-pointer select-none"
-        aria-label="See how Edubot works across user portals"
-      >
-        <span
-          className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-primary text-primary mr-2.5 transition-transform duration-200 group-hover:scale-110 flex-shrink-0"
-          aria-hidden="true"
-        >
-          <Play className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current ml-0.5" />
-        </span>
-        <span>See How It Works</span>
-      </motion.a>
+        <span>Request a Demo</span>
+        <ArrowUpRight className="w-5 h-5 ml-1.5 stroke-[2.2]" aria-hidden="true" />
+      </a>
     </div>
   );
 }
-
