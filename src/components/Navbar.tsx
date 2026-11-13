@@ -114,7 +114,7 @@ export default function Navbar({ forcedActive, forcedButtonStyle }: NavbarProps)
 
   return (
     <header className="sticky top-0 z-40 w-full bg-white border-b border-[#E0E6EF]/70 transition-colors">
-      <div className="w-full max-w-[1672px] mx-auto px-6 md:px-10 lg:px-[60px] h-[76px] lg:h-[97px] flex items-center justify-between">
+      <div className="w-full max-w-[1280px] mx-auto px-5 md:px-8 lg:px-12 h-[68px] lg:h-[74px] flex items-center justify-between">
         {/* Brand Logo - Official User Logo */}
         <Link
           href={isHomePage ? "#overview" : "/"}
@@ -129,12 +129,12 @@ export default function Navbar({ forcedActive, forcedButtonStyle }: NavbarProps)
           className="group flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-lg py-1"
           aria-label="Edubot home — scroll to top"
         >
-          <EdubotLogo size="lg" />
+          <EdubotLogo size="md" />
         </Link>
 
         {/* Desktop Navigation Links */}
         <nav
-          className="hidden md:flex items-center gap-7 lg:gap-10 xl:gap-12"
+          className="hidden md:flex items-center gap-6 lg:gap-8 xl:gap-9"
           aria-label="Main Navigation"
         >
           {navItems.map((item) => {
@@ -144,7 +144,7 @@ export default function Navbar({ forcedActive, forcedButtonStyle }: NavbarProps)
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className={`text-[16px] lg:text-[19px] xl:text-[21px] font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded py-1 cursor-pointer ${
+                className={`text-[15px] lg:text-[16px] font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded py-1 cursor-pointer ${
                   isActive
                     ? "text-primary font-semibold"
                     : "text-[#080D28] hover:text-primary"
@@ -156,12 +156,12 @@ export default function Navbar({ forcedActive, forcedButtonStyle }: NavbarProps)
           })}
         </nav>
 
-        {/* Right Button: Request a Demo (approx 217 × 52px, 9px radius; solid on subpages, cobalt outlined on home reference) */}
+        {/* Right Button: Request a Demo (approx 175 × 44px, 8px radius; solid on subpages, cobalt outlined on home reference) */}
         <div className="hidden md:flex items-center">
           <a
             href={isHomePage ? "#request-demo" : "/#request-demo"}
             onClick={(e) => handleNavClick(e, "#request-demo")}
-            className={`inline-flex items-center justify-center min-w-[180px] lg:w-[217px] h-[46px] lg:h-[52px] rounded-[9px] font-semibold text-sm lg:text-[18px] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 cursor-pointer select-none ${
+            className={`inline-flex items-center justify-center min-w-[150px] lg:w-[175px] h-[40px] lg:h-[44px] rounded-[8px] font-semibold text-xs lg:text-[15px] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 cursor-pointer select-none ${
               forcedButtonStyle === "solid"
                 ? "bg-[#0747FF] hover:bg-[#0039DE] text-white shadow-sm"
                 : "border border-[#0747FF] text-[#0747FF] hover:bg-[#0747FF] hover:text-white"
