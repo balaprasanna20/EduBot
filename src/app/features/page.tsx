@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import FeaturesSection from "@/components/FeaturesSection";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Features — Edubot Education Management System",
@@ -15,10 +16,12 @@ export default function FeaturesPage() {
       <Navbar forcedActive="features" forcedButtonStyle="solid" />
 
       {/* Main Features Content */}
-      <main className="flex-1">
+      <main className="flex-1 flex flex-col justify-center">
         <FeaturesSection />
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
-

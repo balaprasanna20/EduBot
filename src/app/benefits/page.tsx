@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import BenefitsSection from "@/components/BenefitsSection";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Benefits — Edubot Education Management System",
@@ -15,10 +16,12 @@ export default function BenefitsPage() {
       <Navbar forcedActive="benefits" forcedButtonStyle="solid" />
 
       {/* Main Benefits Content */}
-      <main className="flex-1">
+      <main className="flex-1 flex flex-col justify-center">
         <BenefitsSection />
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
-

@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import UserPortalsSection from "@/components/UserPortalsSection";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "User Portals — Edubot Education Management System",
@@ -15,10 +16,12 @@ export default function UserPortalsPage() {
       <Navbar forcedActive="user-portals" forcedButtonStyle="solid" />
 
       {/* Main User Portals Content */}
-      <main className="flex-1">
+      <main className="flex-1 flex flex-col justify-center">
         <UserPortalsSection />
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
-

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import { Shield, Settings, GraduationCap, User, ArrowUpRight, ArrowRight } from "lucide-react";
@@ -78,23 +79,17 @@ export default function UserPortalsSection() {
 
   const handleRoleClick = (roleParam: string) => {
     if (typeof window !== "undefined") {
-      window.dispatchEvent(
-        new CustomEvent("edubot-preselect-role", { detail: { role: roleParam } })
-      );
+      window.sessionStorage.setItem("edubot-preselect-role", roleParam);
       const demoElem = document.getElementById("request-demo");
       if (demoElem) {
+        window.dispatchEvent(
+          new CustomEvent("edubot-preselect-role", { detail: { role: roleParam } })
+        );
         const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         demoElem.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth" });
+      } else {
+        window.location.href = `/request-demo?role=${encodeURIComponent(roleParam)}`;
       }
-    }
-  };
-
-  const handleScrollToBenefits = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const elem = document.getElementById("benefits");
-    if (elem) {
-      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      elem.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth" });
     }
   };
 
@@ -302,15 +297,13 @@ export default function UserPortalsSection() {
             Built around people. Connected by Edubot.
           </p>
 
-          <motion.a
-            href="#benefits"
-            onClick={handleScrollToBenefits}
-            whileHover={{ x: 3 }}
+          <Link
+            href="/benefits"
             className="inline-flex items-center text-primary font-semibold hover:text-primary-hover group transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded cursor-pointer"
           >
             <span>Explore the benefits</span>
             <ArrowRight className="w-4 h-4 ml-1.5 transition-transform duration-200 group-hover:translate-x-1" />
-          </motion.a>
+          </Link>
         </motion.div>
       </div>
     </section>

@@ -7,19 +7,19 @@ export default function OverviewSection() {
   return (
     <section
       id="overview"
-      className="relative w-full bg-white overflow-hidden scroll-mt-20 border-b border-[#E0E6EF]"
+      className="relative w-full bg-white overflow-hidden border-b border-[#E0E6EF] lg:min-h-[calc(100vh-72px)] flex flex-col justify-center"
       aria-label="Overview"
     >
-      {/* Unified 1280px Container matching all other sections */}
-      <div className="w-full max-w-[1280px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-[45%_55%] xl:grid-cols-[44%_56%] items-stretch min-h-0">
-          {/* Left Content Column: aligned to standard desktop side padding lg:pl-12 */}
-          <div className="w-full flex flex-col justify-center px-5 sm:px-8 lg:pl-12 lg:pr-6 py-6 sm:py-8 lg:py-10 z-10 bg-white">
+      {/* Full-bleed editorial grid without arbitrary container side-margins */}
+      <div className="w-full flex-1 flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[44%_56%] xl:grid-cols-[40%_60%] items-stretch min-h-0 flex-1">
+          {/* Left Content Column: aligned with navbar padding (pl-6 sm:pl-10 lg:pl-14 xl:pl-20) */}
+          <div className="w-full flex flex-col justify-center px-6 sm:px-10 lg:pl-14 xl:pl-20 lg:pr-8 py-8 sm:py-10 lg:py-12 z-10 bg-white">
             <HeroContent />
           </div>
 
-          {/* Right Artwork Column: clean vertical flush edge meeting left panel */}
-          <div className="w-full h-full relative overflow-hidden bg-white p-0 rounded-none border-none flex items-stretch">
+          {/* Right Artwork Column: extends flush to right edge without white margin gaps */}
+          <div className="w-full h-full relative overflow-hidden bg-white p-0 rounded-none border-none flex items-stretch min-h-[340px] sm:min-h-[440px] lg:min-h-full">
             <CampusVisual imageSrc="/images/hero-campus-reference-2x.webp" />
           </div>
         </div>

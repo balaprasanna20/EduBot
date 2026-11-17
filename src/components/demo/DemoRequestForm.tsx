@@ -71,18 +71,35 @@ export default function DemoRequestForm() {
 
   const selectedInstitutionType = watch("institutionType");
 
-  // Listen for role preselection from User Portals section or hero strip
+  // Listen for role preselection from URL param, session storage, or custom event
   useEffect(() => {
+    const applyRole = (incomingRole: string) => {
+      const matched =
+        incomingRole === "Mentor"
+          ? "Mentor / Educator"
+          : rolesList.find((r) => r.toLowerCase() === incomingRole.toLowerCase()) ||
+            incomingRole;
+      setValue("role", matched, { shouldValidate: true });
+    };
+
+    if (typeof window !== "undefined") {
+      const urlRole = new URLSearchParams(window.location.search).get("role");
+      if (urlRole) {
+        applyRole(urlRole);
+      } else {
+        const stored = window.sessionStorage.getItem("edubot-preselect-role");
+        if (stored) {
+          applyRole(stored);
+          window.sessionStorage.removeItem("edubot-preselect-role");
+        }
+      }
+    }
+
     const handlePreselect = (event: Event) => {
       const customEvent = event as CustomEvent<{ role: string }>;
       const incomingRole = customEvent.detail?.role;
       if (incomingRole) {
-        const matched =
-          incomingRole === "Mentor"
-            ? "Mentor / Educator"
-            : rolesList.find((r) => r.toLowerCase() === incomingRole.toLowerCase()) ||
-              incomingRole;
-        setValue("role", matched, { shouldValidate: true });
+        applyRole(incomingRole);
       }
     };
 

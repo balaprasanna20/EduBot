@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import {
@@ -181,15 +182,13 @@ export default function FeaturesSection() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-center mt-6 sm:mt-8"
         >
-          <motion.a
-            href="#user-portals"
-            onClick={handleScrollToPortals}
-            whileHover={{ x: 3 }}
+          <Link
+            href="/user-portals"
             className="inline-flex items-center text-primary font-semibold text-sm sm:text-base group transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded cursor-pointer"
           >
             <span>Explore user portals</span>
             <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1.5" />
-          </motion.a>
+          </Link>
         </motion.div>
       </div>
     </section>
