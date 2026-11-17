@@ -2,6 +2,7 @@
 
 import React from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { scrollToSection } from "@/lib/scroll";
 
 export interface HeroActionsProps {
   className?: string;
@@ -10,13 +11,7 @@ export interface HeroActionsProps {
 export default function HeroActions({ className = "" }: HeroActionsProps) {
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
-    const elem = document.getElementById(targetId);
-    if (elem) {
-      const prefersReduced =
-        typeof window !== "undefined" &&
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      elem.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth" });
-    }
+    scrollToSection(targetId);
   };
 
   return (

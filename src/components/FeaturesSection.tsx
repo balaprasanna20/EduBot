@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
+import { scrollToSection } from "@/lib/scroll";
 import { motion, type Variants } from "framer-motion";
 import {
   Users,
@@ -79,11 +79,7 @@ const cardVariants: Variants = {
 export default function FeaturesSection() {
   const handleScrollToPortals = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const elem = document.getElementById("user-portals");
-    if (elem) {
-      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      elem.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth" });
-    }
+    scrollToSection("user-portals");
   };
 
   return (

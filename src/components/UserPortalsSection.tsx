@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
+import { scrollToSection } from "@/lib/scroll";
 import { motion, type Variants } from "framer-motion";
 import { Shield, Settings, GraduationCap, User, ArrowUpRight, ArrowRight } from "lucide-react";
 
@@ -80,26 +80,16 @@ export default function UserPortalsSection() {
   const handleRoleClick = (roleParam: string) => {
     if (typeof window !== "undefined") {
       window.sessionStorage.setItem("edubot-preselect-role", roleParam);
-      const demoElem = document.getElementById("request-demo");
-      if (demoElem) {
-        window.dispatchEvent(
-          new CustomEvent("edubot-preselect-role", { detail: { role: roleParam } })
-        );
-        const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        demoElem.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth" });
-      } else {
-        window.location.href = `/request-demo?role=${encodeURIComponent(roleParam)}`;
-      }
+      window.dispatchEvent(
+        new CustomEvent("edubot-preselect-role", { detail: { role: roleParam } })
+      );
+      scrollToSection("request-demo");
     }
   };
 
   const handleScrollToBenefits = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const elem = document.getElementById("benefits");
-    if (elem) {
-      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      elem.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth" });
-    }
+    scrollToSection("benefits");
   };
 
   return (

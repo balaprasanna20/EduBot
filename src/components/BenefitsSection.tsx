@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import { Layers, BarChart3, Users, ArrowRight } from "lucide-react";
+import { scrollToSection } from "@/lib/scroll";
 
 const cardContainerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -31,11 +32,7 @@ const cardItemVariants: Variants = {
 export default function BenefitsSection() {
   const handleScrollToOverview = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const elem = document.getElementById("overview");
-    if (elem) {
-      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      elem.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth" });
-    }
+    scrollToSection("overview");
   };
 
   return (

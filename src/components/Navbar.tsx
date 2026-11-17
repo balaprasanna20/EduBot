@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import EdubotLogo from "./EdubotLogo";
 import { Menu, X } from "lucide-react";
+import { scrollToSection } from "@/lib/scroll";
 
 interface NavbarProps {
   forcedActive?: "overview" | "features" | "user-portals" | "benefits" | "none";
@@ -16,6 +17,8 @@ export default function Navbar({ forcedActive, forcedButtonStyle }: NavbarProps)
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>("overview");
+  const isAutoScrollingRef = useRef<boolean>(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const isHomePage = pathname === "/";
 
@@ -32,6 +35,9 @@ export default function Navbar({ forcedActive, forcedButtonStyle }: NavbarProps)
 
     const observer = new IntersectionObserver(
       (entries) => {
+        // Skip observer updates while programmatic smooth scroll is animating
+        if (isAutoScrollingRef.current) return;
+
         const visible = entries.filter((e) => e.isIntersecting);
         if (visible.length > 0) {
           visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
@@ -45,14 +51,15 @@ export default function Navbar({ forcedActive, forcedButtonStyle }: NavbarProps)
       },
       {
         root: null,
-        rootMargin: "-25% 0px -45% 0px",
-        threshold: [0, 0.2, 0.5, 0.8],
+        rootMargin: "-20% 0px -40% 0px",
+        threshold: [0, 0.15, 0.4, 0.7],
       }
     );
 
     sectionElements.forEach((el) => observer.observe(el));
 
     const handleScroll = () => {
+      if (isAutoScrollingRef.current) return;
       if (window.scrollY < 80) {
         setActiveSection("overview");
       }
@@ -62,6 +69,7 @@ export default function Navbar({ forcedActive, forcedButtonStyle }: NavbarProps)
     return () => {
       observer.disconnect();
       window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     };
   }, [isHomePage, forcedActive]);
 
@@ -102,22 +110,28 @@ export default function Navbar({ forcedActive, forcedButtonStyle }: NavbarProps)
     { name: "Benefits", href: isHomePage ? "#benefits" : "/#benefits", id: "benefits" },
   ];
 
+  // Mathematical smooth-scroll click handler with instant active state feedback
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, sectionId: string) => {
+    const isMobileDrawer = mobileMenuOpen;
     setMobileMenuOpen(false);
+
     if (isHomePage) {
       e.preventDefault();
       setActiveSection(sectionId);
 
-      if (sectionId === "overview") {
-        const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        window.scrollTo({ top: 0, behavior: prefersReduced ? "auto" : "smooth" });
-        return;
-      }
+      // Lock observer updates during smooth animation to avoid intermediate section flashing
+      isAutoScrollingRef.current = true;
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+      scrollTimeoutRef.current = setTimeout(() => {
+        isAutoScrollingRef.current = false;
+      }, 850);
 
-      const element = document.getElementById(sectionId);
-      if (element) {
-        const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        element.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth" });
+      if (isMobileDrawer) {
+        setTimeout(() => {
+          scrollToSection(sectionId);
+        }, 60);
+      } else {
+        scrollToSection(sectionId);
       }
     }
   };
