@@ -41,7 +41,7 @@ export default function BenefitsSection() {
   return (
     <section
       id="benefits"
-      className="relative w-full bg-white py-6 md:py-8 lg:py-10 border-b border-[#E0E6EF] scroll-mt-20"
+      className="relative w-full bg-white py-6 md:py-8 lg:py-10 border-b border-[#E0E6EF] scroll-mt-[72px]"
       aria-label="Why Edubot — Benefits"
     >
       <div className="max-w-[1280px] mx-auto px-5 md:px-8 lg:px-12">

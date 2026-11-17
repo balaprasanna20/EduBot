@@ -93,10 +93,19 @@ export default function UserPortalsSection() {
     }
   };
 
+  const handleScrollToBenefits = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const elem = document.getElementById("benefits");
+    if (elem) {
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      elem.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth" });
+    }
+  };
+
   return (
     <section
       id="user-portals"
-      className="relative w-full bg-white py-6 md:py-8 lg:py-10 border-b border-[#E0E6EF] scroll-mt-20"
+      className="relative w-full bg-white py-6 md:py-8 lg:py-10 border-b border-[#E0E6EF] scroll-mt-[72px]"
     >
       <div className="max-w-[1280px] mx-auto px-5 md:px-8 lg:px-12">
         {/* Top Header: Centered in the middle of the page with inline Edubot 'e' logo */}
@@ -297,13 +306,14 @@ export default function UserPortalsSection() {
             Built around people. Connected by Edubot.
           </p>
 
-          <Link
-            href="/benefits"
+          <a
+            href="#benefits"
+            onClick={handleScrollToBenefits}
             className="inline-flex items-center text-primary font-semibold hover:text-primary-hover group transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded cursor-pointer"
           >
             <span>Explore the benefits</span>
             <ArrowRight className="w-4 h-4 ml-1.5 transition-transform duration-200 group-hover:translate-x-1" />
-          </Link>
+          </a>
         </motion.div>
       </div>
     </section>

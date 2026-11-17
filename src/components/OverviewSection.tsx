@@ -7,7 +7,7 @@ export default function OverviewSection() {
   return (
     <section
       id="overview"
-      className="relative w-full bg-white overflow-hidden border-b border-[#E0E6EF] lg:min-h-[calc(100vh-72px)] flex flex-col justify-center"
+      className="relative w-full bg-white overflow-hidden border-b border-[#E0E6EF] lg:h-[calc(100vh-72px)] lg:min-h-[640px] flex flex-col justify-center scroll-mt-[72px]"
       aria-label="Overview"
     >
       {/* Full-bleed editorial grid without arbitrary container side-margins */}

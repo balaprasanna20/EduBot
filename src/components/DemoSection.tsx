@@ -20,7 +20,7 @@ export default function DemoSection() {
   return (
     <section
       id="request-demo"
-      className="relative w-full bg-[#E5F1FD] lg:bg-[linear-gradient(to_right,white_46.4%,#E5F1FD_46.4%)] scroll-mt-20 overflow-hidden"
+      className="relative w-full bg-[#E5F1FD] lg:bg-[linear-gradient(to_right,white_46.4%,#E5F1FD_46.4%)] scroll-mt-[72px] overflow-hidden"
       aria-label="Request a Demo"
     >
       {/* 46.4% Left (White) / 53.6% Right (Pale Blue) Composition matching reference */}

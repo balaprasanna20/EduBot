@@ -87,7 +87,7 @@ export default function FeaturesSection() {
   };
 
   return (
-    <section id="features" className="relative w-full bg-white py-6 md:py-8 lg:py-10 scroll-mt-20">
+    <section id="features" className="relative w-full bg-white py-6 md:py-8 lg:py-10 scroll-mt-[72px]">
       <div className="max-w-[1280px] mx-auto px-5 md:px-8 lg:px-12">
         {/* Section Header: Centered in the middle with inline Edubot 'e' logo */}
         <motion.div
@@ -182,13 +182,14 @@ export default function FeaturesSection() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-center mt-6 sm:mt-8"
         >
-          <Link
-            href="/user-portals"
+          <a
+            href="#user-portals"
+            onClick={handleScrollToPortals}
             className="inline-flex items-center text-primary font-semibold text-sm sm:text-base group transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded cursor-pointer"
           >
             <span>Explore user portals</span>
             <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1.5" />
-          </Link>
+          </a>
         </motion.div>
       </div>
     </section>
